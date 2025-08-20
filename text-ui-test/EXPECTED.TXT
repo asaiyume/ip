@@ -5,3 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Zbot
+What can I do for you?
+Got it. I've added this task:
+  [T][ ] borrow book
+Now you have 1 task in the list.
+Here are the tasks in your list:
+1. [T][ ] borrow book
+Got it. I've added this task:
+  [D][ ] return book (by: 2/12/2019 1800)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+  [E][ ] project meeting (from: 2/12/2019 1400 to: 2/12/2019 1600)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: 2/12/2019 1800)
+3. [E][ ] project meeting (from: 2/12/2019 1400 to: 2/12/2019 1600)
+Nice! I've marked this task as done:
+  [T][X] borrow book
+Nice! I've marked this task as done:
+  [D][X] return book (by: 2/12/2019 1800)
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [D][X] return book (by: 2/12/2019 1800)
+3. [E][ ] project meeting (from: 2/12/2019 1400 to: 2/12/2019 1600)
+OK, I've marked this task as not done yet:
+  [T][ ] borrow book
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][X] return book (by: 2/12/2019 1800)
+3. [E][ ] project meeting (from: 2/12/2019 1400 to: 2/12/2019 1600)
+Bye. Hope to see you again soon!
