@@ -67,6 +67,32 @@ public class Zbot {
                 } catch (NumberFormatException e) {
                     System.out.println("OOPS!!! Please provide a valid task number for unmark command.");
                 }
+            } else if (input.startsWith("delete ")) {
+                try {
+                    String numberStr = input.substring(7).trim();
+                    if (numberStr.isEmpty()) {
+                        System.out.println("OOPS!!! The task number for delete command cannot be empty.");
+                    } else {
+                        int taskIndex = Integer.parseInt(numberStr) - 1;
+                        if (taskIndex < 0 || taskIndex >= taskCount) {
+                            System.out.println("OOPS!!! Task number " + (taskIndex + 1) + " does not exist.");
+                        } else {
+                            Task deletedTask = tasks[taskIndex];
+                            System.out.println("Noted. I've removed this task:");
+                            System.out.println("  " + deletedTask);
+                            
+                            // Shift remaining tasks left
+                            for (int i = taskIndex; i < taskCount - 1; i++) {
+                                tasks[i] = tasks[i + 1];
+                            }
+                            taskCount--;
+                            
+                            System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("OOPS!!! Please provide a valid task number for delete command.");
+                }
             } else if (input.equals("todo")) {
                 System.out.println("OOPS!!! The description of a todo cannot be empty.");
             } else if (input.startsWith("todo ")) {

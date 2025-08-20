@@ -30,10 +30,10 @@ Here are the tasks in your list:
 1. [T][X] borrow book
 2. [D][X] return book (by: 2/12/2019 1800)
 3. [E][ ] project meeting (from: 2/12/2019 1400 to: 2/12/2019 1600)
-OK, I've marked this task as not done yet:
-  [T][ ] borrow book
+Noted. I've removed this task:
+  [D][X] return book (by: 2/12/2019 1800)
+Now you have 2 tasks in the list.
 Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [D][X] return book (by: 2/12/2019 1800)
-3. [E][ ] project meeting (from: 2/12/2019 1400 to: 2/12/2019 1600)
+1. [T][X] borrow book
+2. [E][ ] project meeting (from: 2/12/2019 1400 to: 2/12/2019 1600)
 Bye. Hope to see you again soon!
