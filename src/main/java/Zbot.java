@@ -13,7 +13,11 @@ public class Zbot {
         System.out.println("What can I do for you?");
         
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input;
+        
+        while (!(input = scanner.nextLine()).equals("bye")) {
+            System.out.println(input);
+        }
         
         System.out.println("Bye. Hope to see you again soon!");
         scanner.close();
