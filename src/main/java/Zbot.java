@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Zbot {
+    private static String[] tasks = new String[100];
+    private static int taskCount = 0;
+    
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,7 +19,20 @@ public class Zbot {
         String input;
         
         while (!(input = scanner.nextLine()).equals("bye")) {
-            System.out.println(input);
+            if (input.equals("list")) {
+                if (taskCount == 0) {
+                    System.out.println("No tasks in your list yet!");
+                } else {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < taskCount; i++) {
+                        System.out.println((i + 1) + ". " + tasks[i]);
+                    }
+                }
+            } else {
+                tasks[taskCount] = input;
+                taskCount++;
+                System.out.println("added: " + input);
+            }
         }
         
         System.out.println("Bye. Hope to see you again soon!");
