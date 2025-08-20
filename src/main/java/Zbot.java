@@ -19,7 +19,10 @@ public class Zbot {
         String input;
         
         while (!(input = scanner.nextLine()).equals("bye")) {
-            if (input.equals("list")) {
+            input = input.trim();
+            if (input.isEmpty()) {
+                System.out.println("OOPS!!! Please enter a command.");
+            } else if (input.equals("list")) {
                 if (taskCount == 0) {
                     System.out.println("No tasks in your list yet!");
                 } else {
@@ -29,51 +32,116 @@ public class Zbot {
                     }
                 }
             } else if (input.startsWith("mark ")) {
-                int taskIndex = Integer.parseInt(input.substring(5)) - 1;
-                tasks[taskIndex].markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + tasks[taskIndex]);
+                try {
+                    String numberStr = input.substring(5).trim();
+                    if (numberStr.isEmpty()) {
+                        System.out.println("OOPS!!! The task number for mark command cannot be empty.");
+                    } else {
+                        int taskIndex = Integer.parseInt(numberStr) - 1;
+                        if (taskIndex < 0 || taskIndex >= taskCount) {
+                            System.out.println("OOPS!!! Task number " + (taskIndex + 1) + " does not exist.");
+                        } else {
+                            tasks[taskIndex].markAsDone();
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println("  " + tasks[taskIndex]);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("OOPS!!! Please provide a valid task number for mark command.");
+                }
             } else if (input.startsWith("unmark ")) {
-                int taskIndex = Integer.parseInt(input.substring(7)) - 1;
-                tasks[taskIndex].markAsUndone();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println("  " + tasks[taskIndex]);
+                try {
+                    String numberStr = input.substring(7).trim();
+                    if (numberStr.isEmpty()) {
+                        System.out.println("OOPS!!! The task number for unmark command cannot be empty.");
+                    } else {
+                        int taskIndex = Integer.parseInt(numberStr) - 1;
+                        if (taskIndex < 0 || taskIndex >= taskCount) {
+                            System.out.println("OOPS!!! Task number " + (taskIndex + 1) + " does not exist.");
+                        } else {
+                            tasks[taskIndex].markAsUndone();
+                            System.out.println("OK, I've marked this task as not done yet:");
+                            System.out.println("  " + tasks[taskIndex]);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("OOPS!!! Please provide a valid task number for unmark command.");
+                }
+            } else if (input.equals("todo")) {
+                System.out.println("OOPS!!! The description of a todo cannot be empty.");
             } else if (input.startsWith("todo ")) {
-                String description = input.substring(5);
-                Task task = new Todo(description);
-                tasks[taskCount] = task;
-                taskCount++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task);
-                System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                String description = input.substring(5).trim();
+                if (description.isEmpty()) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    Task task = new Todo(description);
+                    tasks[taskCount] = task;
+                    taskCount++;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + task);
+                    System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                }
+            } else if (input.equals("deadline")) {
+                System.out.println("OOPS!!! The description of a deadline cannot be empty.");
             } else if (input.startsWith("deadline ")) {
-                String[] parts = input.substring(9).split(" /by ");
-                String description = parts[0];
-                String by = parts[1];
-                Task task = new Deadline(description, by);
-                tasks[taskCount] = task;
-                taskCount++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task);
-                System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                try {
+                    String content = input.substring(9);
+                    if (!content.contains(" /by ")) {
+                        System.out.println("OOPS!!! Please specify the deadline with '/by' format.");
+                    } else {
+                        String[] parts = content.split(" /by ", 2);
+                        String description = parts[0].trim();
+                        String by = parts[1].trim();
+                        if (description.isEmpty()) {
+                            System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                        } else if (by.isEmpty()) {
+                            System.out.println("OOPS!!! The deadline time cannot be empty.");
+                        } else {
+                            Task task = new Deadline(description, by);
+                            tasks[taskCount] = task;
+                            taskCount++;
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println("  " + task);
+                            System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("OOPS!!! Please use the format: deadline <description> /by <time>");
+                }
+            } else if (input.equals("event")) {
+                System.out.println("OOPS!!! The description of an event cannot be empty.");
             } else if (input.startsWith("event ")) {
-                String[] parts = input.substring(6).split(" /from | /to ");
-                String description = parts[0];
-                String from = parts[1];
-                String to = parts[2];
-                Task task = new Event(description, from, to);
-                tasks[taskCount] = task;
-                taskCount++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task);
-                System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                try {
+                    String content = input.substring(6);
+                    if (!content.contains(" /from ") || !content.contains(" /to ")) {
+                        System.out.println("OOPS!!! Please specify the event with '/from' and '/to' format.");
+                    } else {
+                        String[] fromSplit = content.split(" /from ", 2);
+                        String description = fromSplit[0].trim();
+                        String[] toSplit = fromSplit[1].split(" /to ", 2);
+                        String from = toSplit[0].trim();
+                        String to = toSplit[1].trim();
+                        
+                        if (description.isEmpty()) {
+                            System.out.println("OOPS!!! The description of an event cannot be empty.");
+                        } else if (from.isEmpty()) {
+                            System.out.println("OOPS!!! The event start time cannot be empty.");
+                        } else if (to.isEmpty()) {
+                            System.out.println("OOPS!!! The event end time cannot be empty.");
+                        } else {
+                            Task task = new Event(description, from, to);
+                            tasks[taskCount] = task;
+                            taskCount++;
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println("  " + task);
+                            System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("OOPS!!! Please use the format: event <description> /from <start> /to <end>");
+                }
             } else {
-                Task task = new Todo(input);
-                tasks[taskCount] = task;
-                taskCount++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task);
-                System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         
