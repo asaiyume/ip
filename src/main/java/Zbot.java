@@ -56,10 +56,10 @@ public class Zbot {
             return "T | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription();
         } else if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            return "D | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + deadline.getBy();
+            return "D | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + deadline.getByForSaving();
         } else if (task instanceof Event) {
             Event event = (Event) task;
-            return "E | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + event.getFrom() + " | " + event.getTo();
+            return "E | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + event.getFromForSaving() + " | " + event.getToForSaving();
         }
         return "";
     }
