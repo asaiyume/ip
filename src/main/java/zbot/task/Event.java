@@ -61,13 +61,6 @@ public class Event extends Task {
         return originalToString;
     }
 
-    public String getFrom() {
-        return from;
-    }
-
-    public String getTo() {
-        return to;
-    }
 
     @Override
     public String toString() {

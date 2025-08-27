@@ -44,9 +44,6 @@ public class Deadline extends Task {
         return originalByString;
     }
 
-    public String getBy() {
-        return by;
-    }
 
     @Override
     public String toString() {
