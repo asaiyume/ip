@@ -5,6 +5,11 @@ public abstract class Task {
     protected boolean isDone;
     protected TaskType taskType;
 
+    /**
+     * Constructs a new Task with the specified description and type.
+     * @param description The description of the task
+     * @param taskType The type of the task
+     */
     public Task(String description, TaskType taskType) {
         this.description = description;
         this.isDone = false;

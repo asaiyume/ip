@@ -13,12 +13,19 @@ public class Zbot {
     private Storage storage;
     private Ui ui;
     
+    /**
+     * Constructs a new Zbot instance with the specified data file path.
+     * @param filePath The path to the data file for storing tasks
+     */
     public Zbot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadTasks());
     }
     
+    /**
+     * Starts the main application loop, handling user commands until bye command.
+     */
     public void run() {
         ui.showWelcome();
         
