@@ -6,6 +6,7 @@ import zbot.storage.Storage;
 import zbot.task.*;
 import zbot.tasklist.TaskList;
 import zbot.ui.Ui;
+import java.util.ArrayList;
 
 public class Zbot {
     private TaskList tasks;
@@ -58,6 +59,9 @@ public class Zbot {
                 break;
             case EVENT:
                 handleEvent(input);
+                break;
+            case FIND:
+                handleFind(input);
                 break;
             case UNKNOWN:
             default:
@@ -200,6 +204,16 @@ public class Zbot {
             } catch (Exception e) {
                 ui.showError("Please use the format: event <description> /from <start> /to <end>");
             }
+        }
+    }
+    
+    private void handleFind(String input) {
+        String keyword = Parser.extractFindKeyword(input);
+        if (keyword.isEmpty()) {
+            ui.showError("Please specify a keyword to search for.");
+        } else {
+            ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
+            ui.showFindResults(matchingTasks);
         }
     }
     

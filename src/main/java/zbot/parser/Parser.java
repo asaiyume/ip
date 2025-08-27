@@ -41,4 +41,11 @@ public class Parser {
         String to = toSplit[1].trim();
         return new String[]{description, from, to};
     }
+    
+    public static String extractFindKeyword(String input) {
+        if (input.equals("find")) {
+            return "";
+        }
+        return input.substring(5).trim();
+    }
 }
