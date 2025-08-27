@@ -5,3 +5,5 @@ D | 0 | submit assignment | 2/12/2019 1800
 E | 0 | project meeting | 10/12/2019 1400 | 10/12/2019 1600
 D | 0 | weekly report | next Friday
 E | 0 | birthday party | tomorrow evening | late night
+T | 1 | test OOP refactor
+D | 0 | submit project | 15/12/2019 2300
