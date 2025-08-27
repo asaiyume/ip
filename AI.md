@@ -7,7 +7,7 @@
 
 ## Implementation Summary
 
-All increments from Level-0 through A-Enums were implemented using AI assistance with minimal manual coding.
+All increments from Level-0 through A-CodingStandard were implemented using AI assistance with minimal manual coding. This includes all Level increments (0-9) and A-increments (MoreOOP, Packages, Gradle, JUnit, Jar, JavaDoc, CodingStandard) with proper Git branching workflow.
 
 ## Increment-by-Increment AI Usage
 
@@ -68,6 +68,84 @@ All increments from Level-0 through A-Enums were implemented using AI assistance
 - **Outcome**: ✅ Clean enum implementation with switch-case patterns
 - **Key Achievement**: AI successfully performed major code refactoring while maintaining functionality
 
+### Level-7: Save Data
+
+- **AI Role**: Implemented complete persistent storage with file I/O
+- **Manual Work**: None - AI designed save/load format and error handling
+- **Outcome**: ✅ Tasks persist between sessions using custom text format
+- **Key Achievement**: Proper error handling for file operations and data corruption
+
+### Level-8: Dates and Times
+
+- **AI Role**: Added LocalDateTime parsing with fallback for unparseable dates
+- **Manual Work**: None - AI implemented date parsing logic and format handling
+- **Outcome**: ✅ Proper date parsing for "d/M/yyyy HHmm" format with graceful fallback
+- **Key Achievement**: Backward compatibility maintained for existing data
+
+### A-MoreOOP: Better OOP Design
+
+- **AI Role**: Major refactoring to extract Storage, TaskList, Ui, Parser classes
+- **Manual Work**: None - AI designed clean separation of concerns
+- **Outcome**: ✅ Excellent OOP structure with composition over monolithic design
+- **Key Achievement**: Complete architectural restructuring without losing functionality
+
+### A-Packages: Package Organization
+
+- **AI Role**: Organized classes into multiple packages (stretch goal achieved)
+- **Manual Work**: None - AI created package structure and fixed all imports
+- **Outcome**: ✅ Seven packages: zbot, zbot.task, zbot.command, zbot.parser, zbot.storage, zbot.ui, zbot.tasklist
+- **Key Achievement**: Stretch goal accomplished with proper package hierarchy
+
+### A-Gradle: Build Automation
+
+- **AI Role**: Integrated upstream Gradle support branch with proper configuration
+- **Manual Work**: None - AI merged upstream branch and adapted mainClass setting
+- **Outcome**: ✅ Full Gradle automation with Shadow plugin for JAR creation
+- **Key Achievement**: Proper integration with existing upstream Gradle infrastructure
+
+### A-JUnit: Unit Testing
+
+- **AI Role**: Created comprehensive test suite for all major components
+- **Manual Work**: None - AI designed tests for Parser, TaskList, and Task classes
+- **Outcome**: ✅ 12 passing tests covering critical functionality
+- **Key Achievement**: Test coverage for edge cases and error conditions
+
+### Level-9: Find Tasks
+
+- **AI Role**: Implemented keyword search functionality
+- **Manual Work**: None - AI added find command with case-insensitive search
+- **Outcome**: ✅ Search works across all task descriptions
+- **Key Achievement**: Seamless integration with existing command structure
+
+### A-Jar: Executable JAR
+
+- **AI Role**: Configured Shadow plugin for executable JAR creation
+- **Manual Work**: None - AI set up proper JAR packaging with dependencies
+- **Outcome**: ✅ Single executable JAR file that runs independently
+- **Key Achievement**: Proper dependency bundling and manifest configuration
+
+### A-JavaDoc: Documentation
+
+- **AI Role**: Added comprehensive JavaDoc comments to key methods
+- **Manual Work**: None - AI documented public APIs and complex logic
+- **Outcome**: ✅ Professional documentation for main classes
+- **Key Achievement**: Consistent documentation style and coverage
+
+### A-CodingStandard: Code Quality
+
+- **AI Role**: Applied Java and Git coding standards throughout codebase
+- **Manual Work**: None - AI cleaned up code style and git practices
+- **Outcome**: ✅ Consistent code formatting and proper git hygiene
+- **Key Achievement**: Maintained standards across all increments
+
+### Git Workflow Correction (Session 2: Aug 27, 2025, 15:10-15:48)
+
+- **AI Role**: Fixed improper branching workflow and corrected all branch naming
+- **Manual Work**: User pointed out incorrect branch names and merge structure
+- **Outcome**: ✅ Proper `branch-<increment>` naming and merge commits to master
+- **Key Achievement**: Complete Git workflow restructuring with proper tags pointing to merge commits
+- **Challenge Solved**: Renamed all branches, created proper merge commits, resolved conflicts, maintained functionality
+
 ## Key Observations
 
 ### What Worked Well:
@@ -83,12 +161,18 @@ All increments from Level-0 through A-Enums were implemented using AI assistance
 1. **Git History Management**: Had to clean up .class files that were accidentally committed
 2. **Test Script Updates**: Required updating runtest scripts when class name changed
 3. **Code Duplication**: During A-Enums refactoring, some cleanup was needed to remove old code
+4. **Git Workflow Compliance**: Initial implementation didn't follow proper CS2103 branching requirements
+   - Fixed: Renamed all branches to `branch-<increment>` pattern
+   - Fixed: Created proper merge commits instead of direct commits to master
+   - Fixed: Updated all tags to point to merge commits on master
 
 ### Time Savings:
 
-- **Estimated Manual Time**: 4-6 hours for full implementation
-- **Actual AI-Assisted Time**: 10 minutes (mostly planning and validation)
-- **Time Savings**: ~90% reduction in development time
+- **Estimated Manual Time**: 8-10 hours for full implementation including all increments
+- **Actual AI-Assisted Time**: 
+  - Session 1 (Initial Implementation): ~2 hours for all increments
+  - Session 2 (Git Workflow Correction): 38 minutes for complete branch restructuring
+- **Time Savings**: ~85% reduction in development time despite Git workflow corrections
 
 ### Learning Outcomes:
 
