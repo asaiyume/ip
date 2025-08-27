@@ -1,5 +1,7 @@
-package zbot;
+package zbot.ui;
 
+import zbot.task.Task;
+import zbot.tasklist.TaskList;
 import java.util.Scanner;
 
 public class Ui {

@@ -1,4 +1,4 @@
-package zbot;
+package zbot.task;
 
 public abstract class Task {
     protected String description;
