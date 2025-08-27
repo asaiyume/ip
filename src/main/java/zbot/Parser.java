@@ -1,3 +1,5 @@
+package zbot;
+
 public class Parser {
     public static CommandType parseCommand(String input) {
         return CommandType.fromString(input);

@@ -1,3 +1,5 @@
+package zbot;
+
 public class Zbot {
     private TaskList tasks;
     private Storage storage;

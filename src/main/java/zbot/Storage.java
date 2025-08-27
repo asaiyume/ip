@@ -1,3 +1,5 @@
+package zbot;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedReader;
