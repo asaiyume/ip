@@ -1,3 +1,6 @@
+package zbot.tasklist;
+
+import zbot.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {

@@ -1,3 +1,5 @@
+package zbot.task;
+
 public enum TaskType {
     TODO, DEADLINE, EVENT;
 

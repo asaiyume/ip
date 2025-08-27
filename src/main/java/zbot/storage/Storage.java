@@ -1,3 +1,6 @@
+package zbot.storage;
+
+import zbot.task.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedReader;
