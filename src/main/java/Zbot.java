@@ -1,8 +1,102 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Zbot {
     private static Task[] tasks = new Task[100];
     private static int taskCount = 0;
+    private static final String DATA_FILE_PATH = "./data/zbot.txt";
+    
+    private static void loadTasksFromFile() {
+        try {
+            File dataFile = new File(DATA_FILE_PATH);
+            if (!dataFile.exists()) {
+                return; // No saved data yet
+            }
+            
+            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+            String line;
+            taskCount = 0;
+            
+            while ((line = reader.readLine()) != null && taskCount < tasks.length) {
+                Task task = parseTaskFromString(line);
+                if (task != null) {
+                    tasks[taskCount] = task;
+                    taskCount++;
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error loading tasks from file: " + e.getMessage());
+        }
+    }
+    
+    private static void saveTasksToFile() {
+        try {
+            File dataDir = new File("./data");
+            if (!dataDir.exists()) {
+                dataDir.mkdirs();
+            }
+            
+            FileWriter writer = new FileWriter(DATA_FILE_PATH);
+            for (int i = 0; i < taskCount; i++) {
+                writer.write(taskToSaveString(tasks[i]) + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error saving tasks to file: " + e.getMessage());
+        }
+    }
+    
+    private static String taskToSaveString(Task task) {
+        if (task instanceof Todo) {
+            return "T | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription();
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            return "D | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + deadline.getBy();
+        } else if (task instanceof Event) {
+            Event event = (Event) task;
+            return "E | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + event.getFrom() + " | " + event.getTo();
+        }
+        return "";
+    }
+    
+    private static Task parseTaskFromString(String line) {
+        String[] parts = line.split(" \\| ");
+        if (parts.length < 3) {
+            return null;
+        }
+        
+        String type = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+        
+        Task task = null;
+        switch (type) {
+            case "T":
+                task = new Todo(description);
+                break;
+            case "D":
+                if (parts.length >= 4) {
+                    task = new Deadline(description, parts[3]);
+                }
+                break;
+            case "E":
+                if (parts.length >= 5) {
+                    task = new Event(description, parts[3], parts[4]);
+                }
+                break;
+        }
+        
+        if (task != null && isDone) {
+            task.markAsDone();
+        }
+        
+        return task;
+    }
 
     private static void handleCommand(CommandType command, String input) {
         switch (command) {
@@ -58,6 +152,7 @@ public class Zbot {
                     tasks[taskIndex].markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + tasks[taskIndex]);
+                    saveTasksToFile();
                 }
             }
         } catch (NumberFormatException e) {
@@ -78,6 +173,7 @@ public class Zbot {
                     tasks[taskIndex].markAsUndone();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + tasks[taskIndex]);
+                    saveTasksToFile();
                 }
             }
         } catch (NumberFormatException e) {
@@ -106,6 +202,7 @@ public class Zbot {
                     taskCount--;
                     
                     System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                    saveTasksToFile();
                 }
             }
         } catch (NumberFormatException e) {
@@ -127,6 +224,7 @@ public class Zbot {
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + task);
                 System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                saveTasksToFile();
             }
         }
     }
@@ -154,6 +252,7 @@ public class Zbot {
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + task);
                         System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                        saveTasksToFile();
                     }
                 }
             } catch (Exception e) {
@@ -190,6 +289,7 @@ public class Zbot {
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + task);
                         System.out.println("Now you have " + taskCount + " task" + (taskCount == 1 ? "" : "s") + " in the list.");
+                        saveTasksToFile();
                     }
                 }
             } catch (Exception e) {
@@ -208,6 +308,8 @@ public class Zbot {
         
         System.out.println("Hello! I'm Zbot");
         System.out.println("What can I do for you?");
+        
+        loadTasksFromFile();
         
         Scanner scanner = new Scanner(System.in);
         String input;
