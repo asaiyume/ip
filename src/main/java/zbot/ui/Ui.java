@@ -3,6 +3,7 @@ package zbot.ui;
 import zbot.task.Task;
 import zbot.tasklist.TaskList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Ui {
     private Scanner scanner;
@@ -69,6 +70,17 @@ public class Ui {
     
     public void showError(String message) {
         System.out.println("OOPS!!! " + message);
+    }
+    
+    public void showFindResults(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            System.out.println("No matching tasks found.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println((i + 1) + ". " + matchingTasks.get(i));
+            }
+        }
     }
     
     public void close() {
