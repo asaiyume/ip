@@ -7,7 +7,7 @@
 
 ## Implementation Summary
 
-All increments from Level-0 through A-CodingStandard were implemented using AI assistance with minimal manual coding. This includes all Level increments (0-9) and A-increments (MoreOOP, Packages, Gradle, JUnit, Jar, JavaDoc, CodingStandard) with proper Git branching workflow.
+All increments from Level-0 through Week 4 submission were implemented using AI assistance with minimal manual coding. This includes all Level increments (0-10) and A-increments (MoreOOP, Packages, Gradle, JUnit, Jar, JavaDoc, CodingStandard, Checkstyle, Varargs) with proper Git branching workflow.
 
 ## Increment-by-Increment AI Usage
 
@@ -138,6 +138,34 @@ All increments from Level-0 through A-CodingStandard were implemented using AI a
 - **Outcome**: ✅ Consistent code formatting and proper git hygiene
 - **Key Achievement**: Maintained standards across all increments
 
+### A-Checkstyle: Automated Style Checking
+
+- **AI Role**: Configured CheckStyle with comprehensive rules for code quality enforcement
+- **Manual Work**: None - AI created checkstyle.xml with 30+ rules and integrated with Gradle
+- **Outcome**: ✅ Automated style checking passes without violations
+- **Key Achievement**: Professional code quality tooling with automated enforcement
+
+### Level-10: JavaFX GUI Implementation
+
+- **AI Role**: Complete GUI transformation from CLI to JavaFX interface
+- **Manual Work**: None - AI created DialogBox, MainWindow, and Main classes with FXML
+- **Outcome**: ✅ Full-featured chat-style GUI with user input and bot responses
+- **Key Achievement**: Seamless transition from CLI to modern GUI while maintaining all functionality
+
+### A-Varargs: Variable Arguments Support
+
+- **AI Role**: Enhanced Ui class with varargs methods for flexible parameter handling
+- **Manual Work**: None - AI implemented showFormattedError and showTaskDetails with Object... parameters
+- **Outcome**: ✅ Flexible method signatures supporting variable arguments
+- **Key Achievement**: Improved code maintainability with reduced method overloading
+
+### Week 4 Completion (Session 3: Sep 3, 2025, 16:00-16:15)
+
+- **AI Role**: Finalized Week 4 requirements, created GFMD PR description, completed branch merging and tagging
+- **Manual Work**: User guidance on PR requirements and tagging conventions
+- **Outcome**: ✅ All Week 4 deliverables completed: A-Checkstyle, Level-10, A-Varargs with proper tags
+- **Key Achievement**: Professional PR documentation with all 10 GFMD elements for CS2103 submission
+
 ### Git Workflow Correction (Session 2: Aug 27, 2025, 15:10-15:48)
 
 - **AI Role**: Fixed improper branching workflow and corrected all branch naming
@@ -172,7 +200,8 @@ All increments from Level-0 through A-CodingStandard were implemented using AI a
 - **Actual AI-Assisted Time**: 
   - Session 1 (Initial Implementation): 10 minutes for all increments
   - Session 2 (Git Workflow Correction): 38 minutes for complete branch restructuring
-- **Time Savings**: ~95% reduction in development time (48 minutes vs 8-10 hours estimated manual time)
+  - Session 3 (Week 4 Completion): 15 minutes for final deliverables
+- **Time Savings**: ~95% reduction in development time (63 minutes vs 8-10 hours estimated manual time)
 
 ### Learning Outcomes:
 

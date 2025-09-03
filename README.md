@@ -1,16 +1,29 @@
 # Zbot
 
-Zbot is a task management chatbot application built in Java. It allows users to manage their tasks through a command-line interface with persistent storage.
+Zbot is a modern task management chatbot application built in Java. It features both a graphical user interface (JavaFX) and command-line interface, with comprehensive task management capabilities and persistent storage.
 
 ## Features
 
+### Core Task Management
 - **Task Management**: Create, list, mark, unmark, and delete tasks
 - **Task Types**: Support for three types of tasks:
   - **Todo**: Simple tasks with descriptions
   - **Deadline**: Tasks with due dates (format: `/by <time>`)  
   - **Event**: Tasks with time ranges (format: `/from <start> /to <end>`)
-- **Search**: Find tasks by keyword
+- **Search**: Find tasks by keyword using `find` command
 - **Persistent Storage**: Tasks are automatically saved to and loaded from `./data/zbot.txt`
+
+### User Interface
+- **Modern JavaFX GUI**: Chat-style graphical interface with intuitive design
+- **Dual Interface Support**: Both GUI and command-line interfaces available
+- **Real-time Interaction**: Instant response to user commands
+- **Professional Design**: Clean interface with dialog boxes and user-friendly layout
+
+### Development Features
+- **CheckStyle Integration**: Automated code quality checking
+- **Variable Arguments Support**: Enhanced method flexibility with varargs
+- **Comprehensive Testing**: Unit tests and automated UI testing
+- **Build Automation**: Gradle build system with executable JAR generation
 
 ## Commands
 
@@ -41,7 +54,7 @@ Zbot is a task management chatbot application built in Java. It allows users to 
 
 ### Running with Gradle
 ```bash
-# Run the application
+# Run the GUI application
 ./gradlew run
 
 # Build the JAR file
@@ -49,6 +62,9 @@ Zbot is a task management chatbot application built in Java. It allows users to 
 
 # Run tests
 ./gradlew test
+
+# Run CheckStyle checks
+./gradlew checkstyleMain
 ```
 
 ### Running the JAR
@@ -63,11 +79,13 @@ src/
 ├── main/java/zbot/
 │   ├── Zbot.java           # Main application class
 │   ├── command/            # Command type definitions
+│   ├── gui/                # JavaFX GUI components
 │   ├── parser/             # Input parsing logic
 │   ├── storage/            # File I/O operations
 │   ├── task/               # Task classes (Task, Todo, Deadline, Event)
 │   ├── tasklist/           # Task list management
 │   └── ui/                 # User interface handling
+├── main/resources/         # FXML files and images for GUI
 └── test/java/zbot/         # Unit tests
 ```
 
