@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
@@ -29,7 +30,7 @@ test {
 }
 
 application {
-    mainClass.set("zbot.Zbot")
+    mainClass.set("zbot.gui.Main")
 }
 
 shadowJar {
@@ -43,4 +44,9 @@ run{
 
 checkstyle {
     toolVersion = '10.2'
+}
+
+javafx {
+    version = '17.0.2'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
