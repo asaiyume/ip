@@ -108,7 +108,7 @@ public class Zbot {
             } else {
                 int taskIndex = Integer.parseInt(numberStr) - 1;
                 if (taskIndex < 0 || taskIndex >= tasks.getSize()) {
-                    ui.showError("Task number " + (taskIndex + 1) + " does not exist.");
+                    ui.showFormattedError("Task number %d does not exist.", taskIndex + 1);
                 } else {
                     tasks.markTask(taskIndex);
                     ui.showTaskMarked(tasks.getTask(taskIndex));
@@ -168,7 +168,8 @@ public class Zbot {
         } else {
             Task task = new Todo(description);
             tasks.addTask(task);
-            ui.showTaskAdded(task, tasks.getSize());
+            ui.showTaskDetails("Got it. I've added this task:", task,
+                "Now you have " + tasks.getSize() + " task" + (tasks.getSize() == 1 ? "" : "s") + " in the list.");
             storage.saveTasks(tasks.getTasks());
         }
     }

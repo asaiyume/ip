@@ -72,6 +72,22 @@ public class Ui {
         System.out.println("OOPS!!! " + message);
     }
 
+    public void showFormattedMessage(String format, Object... args) {
+        System.out.println(String.format(format, args));
+    }
+
+    public void showFormattedError(String format, Object... args) {
+        System.out.println("OOPS!!! " + String.format(format, args));
+    }
+
+    public void showTaskDetails(String action, Task task, Object... details) {
+        System.out.println(action);
+        System.out.println("  " + task);
+        for (Object detail : details) {
+            System.out.println(detail);
+        }
+    }
+
     public void showFindResults(ArrayList<Task> matchingTasks) {
         if (matchingTasks.isEmpty()) {
             System.out.println("No matching tasks found.");
