@@ -41,3 +41,4 @@ public abstract class Task {
         return taskType.getPrefix() + "[" + getStatusIcon() + "] " + description;
     }
 }
+

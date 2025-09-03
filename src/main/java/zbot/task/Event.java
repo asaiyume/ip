@@ -67,3 +67,4 @@ public class Event extends Task {
         return super.toString() + " (from: " + getFrom() + " to: " + getTo() + ")";
     }
 }
+

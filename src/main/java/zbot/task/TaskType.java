@@ -8,7 +8,7 @@ public enum TaskType {
             case "TODO":
                 return TODO;
             case "DEADLINE":
-                return DEADLINE;  
+                return DEADLINE;
             case "EVENT":
                 return EVENT;
             default:
@@ -29,3 +29,4 @@ public enum TaskType {
         }
     }
 }
+

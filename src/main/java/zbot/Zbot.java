@@ -3,7 +3,10 @@ package zbot;
 import zbot.command.CommandType;
 import zbot.parser.Parser;
 import zbot.storage.Storage;
-import zbot.task.*;
+import zbot.task.Task;
+import zbot.task.Todo;
+import zbot.task.Deadline;
+import zbot.task.Event;
 import zbot.tasklist.TaskList;
 import zbot.ui.Ui;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ public class Zbot {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
-    
+
     /**
      * Constructs a new Zbot instance with the specified data file path.
      * @param filePath The path to the data file for storing tasks
@@ -22,13 +25,13 @@ public class Zbot {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadTasks());
     }
-    
+
     /**
      * Starts the main application loop, handling user commands until bye command.
      */
     public void run() {
         ui.showWelcome();
-        
+
         String input;
         while (!(input = ui.readCommand()).equals("bye")) {
             if (input.isEmpty()) {
@@ -37,14 +40,14 @@ public class Zbot {
                 handleCommand(input);
             }
         }
-        
+
         ui.showGoodbye();
         ui.close();
     }
-    
+
     private void handleCommand(String input) {
         CommandType command = Parser.parseCommand(input);
-        
+
         switch (command) {
             case LIST:
                 handleList();
@@ -76,11 +79,11 @@ public class Zbot {
                 break;
         }
     }
-    
+
     private void handleList() {
         ui.showTaskList(tasks);
     }
-    
+
     private void handleMark(String input) {
         try {
             String numberStr = Parser.extractTaskNumber(input, "mark");
@@ -100,7 +103,7 @@ public class Zbot {
             ui.showError("Please provide a valid task number for mark command.");
         }
     }
-    
+
     private void handleUnmark(String input) {
         try {
             String numberStr = Parser.extractTaskNumber(input, "unmark");
@@ -120,7 +123,7 @@ public class Zbot {
             ui.showError("Please provide a valid task number for unmark command.");
         }
     }
-    
+
     private void handleDelete(String input) {
         try {
             String numberStr = Parser.extractTaskNumber(input, "delete");
@@ -141,7 +144,7 @@ public class Zbot {
             ui.showError("Please provide a valid task number for delete command.");
         }
     }
-    
+
     private void handleTodo(String input) {
         String description = Parser.extractTodoDescription(input);
         if (description.isEmpty()) {
@@ -153,7 +156,7 @@ public class Zbot {
             storage.saveTasks(tasks.getTasks());
         }
     }
-    
+
     private void handleDeadline(String input) {
         if (input.equals("deadline")) {
             ui.showError("The description of a deadline cannot be empty.");
@@ -181,7 +184,7 @@ public class Zbot {
             }
         }
     }
-    
+
     private void handleEvent(String input) {
         if (input.equals("event")) {
             ui.showError("The description of an event cannot be empty.");
@@ -194,7 +197,7 @@ public class Zbot {
                     String description = parts[0];
                     String from = parts[1];
                     String to = parts[2];
-                    
+
                     if (description.isEmpty()) {
                         ui.showError("The description of an event cannot be empty.");
                     } else if (from.isEmpty()) {
@@ -213,7 +216,7 @@ public class Zbot {
             }
         }
     }
-    
+
     private void handleFind(String input) {
         String keyword = Parser.extractFindKeyword(input);
         if (keyword.isEmpty()) {
@@ -223,8 +226,9 @@ public class Zbot {
             ui.showFindResults(matchingTasks);
         }
     }
-    
+
     public static void main(String[] args) {
         new Zbot("./data/zbot.txt").run();
     }
 }
+

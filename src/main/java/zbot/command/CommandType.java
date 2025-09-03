@@ -5,7 +5,7 @@ public enum CommandType {
 
     public static CommandType fromString(String command) {
         command = command.trim().toLowerCase();
-        
+
         if (command.equals("bye")) {
             return BYE;
         } else if (command.equals("list")) {
@@ -29,3 +29,4 @@ public enum CommandType {
         }
     }
 }
+
