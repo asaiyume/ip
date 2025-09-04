@@ -3,7 +3,7 @@ package zbot;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
-import zbot.task.*;
+import zbot.task.Todo;
 import zbot.tasklist.TaskList;
 
 public class TaskListTest {
