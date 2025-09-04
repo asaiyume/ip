@@ -16,13 +16,13 @@ public class TaskListTest {
     }
     
     @Test
-    public void testEmptyTaskList() {
+    public void taskList_newInstance_isEmpty() {
         assertTrue(taskList.isEmpty());
         assertEquals(0, taskList.getSize());
     }
     
     @Test
-    public void testAddTask() {
+    public void addTask_singleTodo_increasesSize() {
         Todo todo = new Todo("test task");
         taskList.addTask(todo);
         
@@ -32,7 +32,7 @@ public class TaskListTest {
     }
     
     @Test
-    public void testDeleteTask() {
+    public void deleteTask_existingTask_removesFromList() {
         Todo todo = new Todo("test task");
         taskList.addTask(todo);
         taskList.deleteTask(0);
@@ -42,7 +42,7 @@ public class TaskListTest {
     }
     
     @Test
-    public void testMarkUnmarkTask() {
+    public void markTask_existingTask_changesTaskStatus() {
         Todo todo = new Todo("test task");
         taskList.addTask(todo);
         
