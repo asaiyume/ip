@@ -1,7 +1,7 @@
 package zbot.command;
 
 public enum CommandType {
-    BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, UNKNOWN;
+    BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, SORT, UNKNOWN;
 
     public static CommandType fromString(String command) {
         command = command.trim().toLowerCase();
@@ -24,6 +24,8 @@ public enum CommandType {
             return EVENT;
         } else if (command.equals("find") || command.startsWith("find ")) {
             return FIND;
+        } else if (command.equals("sort")) {
+            return SORT;
         } else {
             return UNKNOWN;
         }

@@ -106,5 +106,9 @@ public class TaskList {
                 .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
     }
+
+    public void sortTasks() {
+        tasks.sort((task1, task2) -> task1.getDescription().compareToIgnoreCase(task2.getDescription()));
+    }
 }
 

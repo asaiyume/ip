@@ -84,6 +84,8 @@ public class Zbot {
             return handleEventResponse(input);
         case FIND:
             return handleFindResponse(input);
+        case SORT:
+            return handleSortResponse();
         case BYE:
             return "Bye. Hope to see you again soon!";
         case UNKNOWN:
@@ -445,6 +447,16 @@ public class Zbot {
                 .collect(java.util.stream.Collectors.joining("\n"));
 
         return "Here are the matching tasks in your list:\n" + taskList;
+    }
+
+    private String handleSortResponse() {
+        if (tasks.isEmpty()) {
+            return "No tasks to sort!";
+        }
+        
+        tasks.sortTasks();
+        storage.saveTasks(tasks.getTasks());
+        return "Tasks have been sorted alphabetically by description!";
     }
 
     public static void main(String[] args) {
