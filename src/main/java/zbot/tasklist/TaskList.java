@@ -11,14 +11,17 @@ public class TaskList {
     }
 
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Tasks list cannot be null";
         this.tasks = tasks;
     }
 
     public void addTask(Task task) {
+        assert task != null : "Task cannot be null";
         tasks.add(task);
     }
 
     public Task getTask(int index) {
+        assert index >= 0 : "Index cannot be negative";
         if (index >= 0 && index < tasks.size()) {
             return tasks.get(index);
         }
@@ -26,6 +29,7 @@ public class TaskList {
     }
 
     public void deleteTask(int index) {
+        assert index >= 0 : "Index cannot be negative";
         if (index >= 0 && index < tasks.size()) {
             tasks.remove(index);
         }
@@ -58,6 +62,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> findTasks(String keyword) {
+        assert keyword != null : "Keyword cannot be null";
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
