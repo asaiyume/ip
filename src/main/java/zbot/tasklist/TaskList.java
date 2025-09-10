@@ -24,6 +24,7 @@ public class TaskList {
      * @param tasks The initial list of tasks to manage
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Tasks list cannot be null";
         this.tasks = tasks;
     }
 
@@ -33,6 +34,7 @@ public class TaskList {
      * @param task The task to add to the list
      */
     public void addTask(Task task) {
+        assert task != null : "Task cannot be null";
         tasks.add(task);
     }
 
@@ -43,6 +45,7 @@ public class TaskList {
      * @return The task at the specified index, or null if index is invalid
      */
     public Task getTask(int index) {
+        assert index >= 0 : "Index cannot be negative";
         if (isValidIndex(index)) {
             return tasks.get(index);
         }
@@ -55,6 +58,7 @@ public class TaskList {
      * @param index The zero-based index of the task to remove
      */
     public void deleteTask(int index) {
+        assert index >= 0 : "Index cannot be negative";
         if (isValidIndex(index)) {
             tasks.remove(index);
         }
@@ -97,6 +101,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> findTasks(String keyword) {
+        assert keyword != null : "Keyword cannot be null";
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
