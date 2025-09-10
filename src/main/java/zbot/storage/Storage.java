@@ -6,10 +6,11 @@ import zbot.task.Deadline;
 import zbot.task.Event;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Storage {
     private final String filePath;
@@ -19,27 +20,20 @@ public class Storage {
     }
 
     public ArrayList<Task> loadTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
         try {
             File dataFile = new File(filePath);
             if (!dataFile.exists()) {
-                return tasks; // Return empty list if no saved data
+                return new ArrayList<>(); // Return empty list if no saved data
             }
 
-            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                Task task = parseTaskFromString(line);
-                if (task != null) {
-                    tasks.add(task);
-                }
-            }
-            reader.close();
+            return Files.lines(Paths.get(filePath))
+                    .map(this::parseTaskFromString)
+                    .filter(task -> task != null)
+                    .collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
             System.out.println("Error loading tasks from file: " + e.getMessage());
+            return new ArrayList<>();
         }
-        return tasks;
     }
 
     public void saveTasks(ArrayList<Task> tasks) {
@@ -49,9 +43,14 @@ public class Storage {
                 dataDir.mkdirs();
             }
 
+            String content = tasks.stream()
+                    .map(this::taskToSaveString)
+                    .collect(Collectors.joining("\n"));
+
             FileWriter writer = new FileWriter(filePath);
-            for (Task task : tasks) {
-                writer.write(taskToSaveString(task) + "\n");
+            writer.write(content);
+            if (!content.isEmpty()) {
+                writer.write("\n");
             }
             writer.close();
         } catch (IOException e) {

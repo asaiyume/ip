@@ -10,6 +10,7 @@ import zbot.task.Event;
 import zbot.tasklist.TaskList;
 import zbot.ui.Ui;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class Zbot {
     private TaskList tasks;
@@ -90,14 +91,13 @@ public class Zbot {
     private String handleListResponse() {
         if (tasks.isEmpty()) {
             return "No tasks in your list yet!";
-        } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Here are the tasks in your list:\n");
-            for (int i = 0; i < tasks.getSize(); i++) {
-                sb.append((i + 1)).append(". ").append(tasks.getTask(i)).append("\n");
-            }
-            return sb.toString().trim();
         }
+
+        String taskList = IntStream.range(0, tasks.getSize())
+                .mapToObj(i -> (i + 1) + ". " + tasks.getTask(i))
+                .collect(java.util.stream.Collectors.joining("\n"));
+
+        return "Here are the tasks in your list:\n" + taskList;
     }
 
     private void handleMark(String input) {
@@ -389,19 +389,18 @@ public class Zbot {
         String keyword = Parser.extractFindKeyword(input);
         if (keyword.isEmpty()) {
             return "OOPS!!! Please specify a keyword to search for.";
-        } else {
-            ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
-            if (matchingTasks.isEmpty()) {
-                return "No matching tasks found.";
-            } else {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Here are the matching tasks in your list:\n");
-                for (int i = 0; i < matchingTasks.size(); i++) {
-                    sb.append((i + 1)).append(". ").append(matchingTasks.get(i)).append("\n");
-                }
-                return sb.toString().trim();
-            }
         }
+
+        ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
+        if (matchingTasks.isEmpty()) {
+            return "No matching tasks found.";
+        }
+
+        String taskList = IntStream.range(0, matchingTasks.size())
+                .mapToObj(i -> (i + 1) + ". " + matchingTasks.get(i))
+                .collect(java.util.stream.Collectors.joining("\n"));
+
+        return "Here are the matching tasks in your list:\n" + taskList;
     }
 
     public static void main(String[] args) {
