@@ -16,6 +16,8 @@ public class Storage {
     private final String filePath;
 
     public Storage(String filePath) {
+        assert filePath != null : "File path cannot be null";
+        assert !filePath.isEmpty() : "File path cannot be empty";
         this.filePath = filePath;
     }
 
@@ -37,6 +39,7 @@ public class Storage {
     }
 
     public void saveTasks(ArrayList<Task> tasks) {
+        assert tasks != null : "Tasks list cannot be null";
         try {
             File dataDir = new File(filePath).getParentFile();
             if (dataDir != null && !dataDir.exists()) {
@@ -59,6 +62,7 @@ public class Storage {
     }
 
     private String taskToSaveString(Task task) {
+        assert task != null : "Task cannot be null";
         if (task instanceof Todo) {
             return "T | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription();
         } else if (task instanceof Deadline) {
@@ -72,6 +76,8 @@ public class Storage {
     }
 
     private Task parseTaskFromString(String line) {
+        assert line != null : "Line cannot be null";
+        assert !line.isEmpty() : "Line cannot be empty";
         String[] parts = line.split(" \\| ");
         if (parts.length < 3) {
             return null;

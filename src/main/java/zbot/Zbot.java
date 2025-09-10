@@ -13,18 +13,24 @@ import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 public class Zbot {
-    private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
+    private static final String ERROR_PREFIX = "OOPS!!! ";
+    private static final String SUCCESS_PREFIX = "Got it. I've added this task:\n  ";
+    private static final int TASK_DISPLAY_OFFSET = 1;
+
+    private final TaskList tasks;
+    private final Storage storage;
+    private final Ui ui;
 
     /**
      * Constructs a new Zbot instance with the specified data file path.
+     * Initializes the UI, storage, and loads existing tasks from storage.
+     *
      * @param filePath The path to the data file for storing tasks
      */
     public Zbot(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.loadTasks());
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.tasks = new TaskList(storage.loadTasks());
     }
 
     /**
@@ -53,35 +59,75 @@ public class Zbot {
 
     /**
      * Generates a response for the given user input.
-     * @param input The user input
-     * @return The response string
+     * Parses the command and delegates to appropriate handler methods.
+     *
+     * @param input The user input command string
+     * @return The response string to be displayed to the user
      */
     public String getResponse(String input) {
         CommandType command = Parser.parseCommand(input);
 
         switch (command) {
-            case LIST:
-                return handleListResponse();
-            case MARK:
-                return handleMarkResponse(input);
-            case UNMARK:
-                return handleUnmarkResponse(input);
-            case DELETE:
-                return handleDeleteResponse(input);
-            case TODO:
-                return handleTodoResponse(input);
-            case DEADLINE:
-                return handleDeadlineResponse(input);
-            case EVENT:
-                return handleEventResponse(input);
-            case FIND:
-                return handleFindResponse(input);
-            case BYE:
-                return "Bye. Hope to see you again soon!";
-            case UNKNOWN:
-            default:
-                return "I'm sorry, but I don't know what that means :-(";
+        case LIST:
+            return handleListResponse();
+        case MARK:
+            return handleMarkResponse(input);
+        case UNMARK:
+            return handleUnmarkResponse(input);
+        case DELETE:
+            return handleDeleteResponse(input);
+        case TODO:
+            return handleTodoResponse(input);
+        case DEADLINE:
+            return handleDeadlineResponse(input);
+        case EVENT:
+            return handleEventResponse(input);
+        case FIND:
+            return handleFindResponse(input);
+        case BYE:
+            return "Bye. Hope to see you again soon!";
+        case UNKNOWN:
+        default:
+            return "I'm sorry, but I don't know what that means :-(";
         }
+    }
+
+    /**
+     * Validates a task index and returns an error message if invalid.
+     *
+     * @param taskIndex The zero-based task index to validate
+     * @return Error message if invalid, null if valid
+     */
+    private String validateTaskIndex(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= tasks.getSize()) {
+            return ERROR_PREFIX + "Task number " + (taskIndex + TASK_DISPLAY_OFFSET) + " does not exist.";
+        }
+        return null;
+    }
+
+    /**
+     * Converts a one-based task number string to zero-based index.
+     *
+     * @param numberStr The task number as string
+     * @param commandName The command name for error messages
+     * @return Error message if invalid, or null if parsing successful
+     * @throws NumberFormatException if numberStr is not a valid integer
+     */
+    private String parseTaskNumber(String numberStr, String commandName) {
+        if (numberStr.isEmpty()) {
+            return ERROR_PREFIX + "The task number for " + commandName + " command cannot be empty.";
+        }
+        return null;
+    }
+
+    /**
+     * Generates the task count message for added tasks.
+     *
+     * @return Formatted message showing current task count
+     */
+    private String getTaskCountMessage() {
+        int count = tasks.getSize();
+        return "Now you have " + count + " task" + (count == 1 ? "" : "s") + " in the list.";
     }
 
     private void handleList() {
@@ -310,15 +356,13 @@ public class Zbot {
     private String handleTodoResponse(String input) {
         String description = Parser.extractTodoDescription(input);
         if (description.isEmpty()) {
-            return "OOPS!!! The description of a todo cannot be empty.";
-        } else {
-            Task task = new Todo(description);
-            tasks.addTask(task);
-            storage.saveTasks(tasks.getTasks());
-            return "Got it. I've added this task:\n  " + task + "\n"
-                    + "Now you have " + tasks.getSize() + " task"
-                    + (tasks.getSize() == 1 ? "" : "s") + " in the list.";
+            return ERROR_PREFIX + "The description of a todo cannot be empty.";
         }
+
+        Task task = new Todo(description);
+        tasks.addTask(task);
+        storage.saveTasks(tasks.getTasks());
+        return SUCCESS_PREFIX + task + "\n" + getTaskCountMessage();
     }
 
     private String handleDeadlineResponse(String input) {
