@@ -11,6 +11,7 @@ Zbot is a modern task management chatbot application built in Java. It features 
   - **Deadline**: Tasks with due dates (format: `/by <time>`)  
   - **Event**: Tasks with time ranges (format: `/from <start> /to <end>`)
 - **Search**: Find tasks by keyword using `find` command
+- **Task Sorting**: Sort all tasks alphabetically by description using `sort` command
 - **Persistent Storage**: Tasks are automatically saved to and loaded from `./data/zbot.txt`
 
 ### User Interface
@@ -20,10 +21,13 @@ Zbot is a modern task management chatbot application built in Java. It features 
 - **Professional Design**: Clean interface with dialog boxes and user-friendly layout
 
 ### Development Features
+- **Assertion-Based Validation**: Comprehensive assert statements for defensive programming
+- **Java 8 Streams**: Modern functional programming with streams API
+- **Enhanced Code Quality**: Professional documentation and code organization
 - **CheckStyle Integration**: Automated code quality checking
 - **Variable Arguments Support**: Enhanced method flexibility with varargs
 - **Comprehensive Testing**: Unit tests and automated UI testing
-- **Build Automation**: Gradle build system with executable JAR generation
+- **Build Automation**: Gradle build system with executable JAR generation (7.8MB with JavaFX bundled)
 
 ## Commands
 
@@ -35,6 +39,7 @@ Zbot is a modern task management chatbot application built in Java. It features 
 - `unmark <task_number>` - Mark a task as not done
 - `delete <task_number>` - Delete a task
 - `find <keyword>` - Search for tasks containing the keyword
+- `sort` - Sort all tasks alphabetically by description
 - `bye` - Exit the application
 
 ## Setup and Running
@@ -113,6 +118,14 @@ Here are the tasks in your list:
 > mark 1
 Nice! I've marked this task as done:
 [T][X] read book
+
+> sort
+Tasks have been sorted alphabetically by description!
+
+> list  
+Here are the tasks in your list:
+1.[T][X] read book
+2.[D][ ] submit report (by: 2023-12-01)
 
 > bye
 Bye. Hope to see you again soon!
