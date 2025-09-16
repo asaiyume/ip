@@ -1,8 +1,7 @@
-E | 0 | birthday party | tomorrow evening | late night
-E | 0 | project meeting | 10/12/2019 1400 | 10/12/2019 1600
 D | 0 | submit project | 15/12/2019 2300
 D | 1 | submit report | Friday
 E | 0 | team meeting | 2pm | 3pm
 T | 1 | test OOP refactor
 T | 1 | test packages working
 D | 0 | weekly report | next Friday
+T | 1 | take screenshot
