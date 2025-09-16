@@ -205,10 +205,7 @@ sort
 
 **Expected output:**
 ```
-I've sorted your tasks alphabetically:
-1.[T][ ] book review
-2.[T][ ] read book
-3.[D][ ] submit report (by: Oct 15 2023)
+Tasks have been sorted alphabetically by description!
 ```
 
 ### Exiting the program: `bye`
